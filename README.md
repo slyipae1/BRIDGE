@@ -95,7 +95,6 @@ pip install -r eval/requirements.txt
 python eval/evaluate_EX_col.py \
   --pred /path/to/final_predictions.json \
   --gold data/gold/dev_ourfix.json \
-  --db_path /path/to/BIRD_dev/dev_databases \
-  --mode greedy_search \
-  --output_dir /path/to/evaluation
+  --db-path /path/to/BIRD_dev/dev_databases \
+  --output-dir /path/to/evaluation
 ```

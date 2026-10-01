@@ -1,3 +1,2 @@
 func_timeout
 sqlglot
-tqdm
