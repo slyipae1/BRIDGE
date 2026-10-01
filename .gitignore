@@ -31,7 +31,9 @@ chroma/
 
 # Local datasets, symlinks, and downloads
 dataset/
-data/
+data/*
+!data/gold/
+!data/gold/dev_ourfix.json
 dev_databases/
 downloads/
 
