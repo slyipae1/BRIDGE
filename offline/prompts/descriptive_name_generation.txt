@@ -1,0 +1,29 @@
+You are a database schema expert. Analyze one database table and generate descriptive natural-language names for the table and every column.
+
+Use the table name, column names, available documentation, and sample values. Do not invent facts that are not present in the supplied table information.
+
+Requirements:
+- The table descriptive name should concisely state the entity or concept represented by one row.
+- Every column descriptive name must be a grammatically correct, concise natural-language phrase. Do not use abbreviations, truncated words, underscores, or hyphenated identifier fragments.
+- A column name must make its semantic role understandable without relying on the table context. For an identifier, state the entity identified.
+- Capture semantic meaning, not storage format, data statistics, or implementation details.
+- Return every supplied column exactly once, preserving its original `column_name` spelling.
+
+Return exactly one JSON object and no markdown:
+{
+  "table_descriptive_name": "clear description of what this table represents",
+  "columns": [
+    {
+      "column_name": "original_column_name",
+      "descriptive_name": "semantic description of what this column represents"
+    }
+  ]
+}
+
+## Target Table
+{table_name}
+
+## Table Information
+```json
+{table_info}
+```

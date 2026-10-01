@@ -1,0 +1,81 @@
+{
+  "name": "bridge_offline_mainline_v1",
+  "paper_views": [
+    "schema_semantic_similarity",
+    "surface_name_similarity",
+    "value_domain_collision"
+  ],
+  "descriptive_names": {
+    "sample_value_limit": 10,
+    "sample_value_max_chars": 100,
+    "thinking_enabled": false,
+    "artifact_relative_dir": "preprocessed/ColGrp_artifacts/descriptive_names"
+  },
+  "column_profile": {
+    "sample_value_limit": 5,
+    "sample_value_max_chars": 120,
+    "require_complete_descriptive_names": true
+  },
+  "proposal": {
+    "schema_semantic_similarity": {
+      "document_mode": "column_descriptive_name_only",
+      "selection": "rank_min_lte_and_cosine_gte",
+      "max_rank": 10,
+      "min_cosine_similarity": 0.55
+    },
+    "surface_name_similarity": {
+      "submethods": ["lexical", "raw_name_embedding"],
+      "lexical": {
+        "common_token_min_length": 3,
+        "token_overlap_threshold": 0.5,
+        "token_jaccard_threshold": 0.3,
+        "normalized_name_min_length": 5,
+        "char_ngram_dice_threshold": 0.6,
+        "edit_similarity_threshold": 0.7
+      },
+      "raw_name_embedding": {
+        "min_cosine_similarity": 0.6
+      }
+    },
+    "value_domain_collision": {
+      "textual_columns_only": true,
+      "small_domain_min_intersection": 3,
+      "medium_domain_breakpoint": 1000,
+      "medium_domain_min_intersection": 10,
+      "large_domain_breakpoint": 10000,
+      "large_domain_min_intersection": 30,
+      "low_cardinality_min_intersection": 2,
+      "low_cardinality_min_overlap": 1.0,
+      "long_text_min_intersection": 3,
+      "long_text_min_overlap": 0.5,
+      "general_min_overlap": 0.5,
+      "general_min_containment": 0.8
+    },
+    "aggregation": "unordered_pair_keyed_union"
+  },
+  "verification": {
+    "taxonomy_guidance": true,
+    "thinking_enabled": false,
+    "candidate_generation_evidence_in_prompt": false,
+    "decisions": ["ADD_EDGE", "REJECT"]
+  },
+  "graph_materialization": {
+    "accepted_edge_source": "taxonomy_guided_pair_verifier",
+    "relation_label_field": "ambiguity_trigger_context"
+  },
+  "value_index": {
+    "mode": "minhash_lsh",
+    "n_gram": 3,
+    "signature_size": 100,
+    "lsh_threshold": 0.01,
+    "online_top_n": 20
+  },
+  "retained_experiments": {
+    "verification_universe": ["proposal_union", "all_pairs"],
+    "disable_exactly_one_proposal_view": [
+      "schema_semantic_similarity",
+      "surface_name_similarity",
+      "value_domain_collision"
+    ]
+  }
+}

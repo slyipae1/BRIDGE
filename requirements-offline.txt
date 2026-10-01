@@ -1,0 +1,2 @@
+# The offline construction path otherwise uses only the Python standard library.
+datasketch>=1.6,<2

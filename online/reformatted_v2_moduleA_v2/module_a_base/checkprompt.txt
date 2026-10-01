@@ -1,0 +1,43 @@
+You are analyzing why a previously generated SQL query was incorrect.
+
+Based on the user question, database schema, and retrieved candidate elements, identify any ambiguities that may have led to the wrong SQL.
+
+Focus on:
+- AmbiColumn: Which column or columns should be used (e.g. for a given condition or output)?
+- AmbiValue: Which specific value or values should be used (e.g. in a filter condition or others)?
+
+For each ambiguity, provide the options that the SQL author could have chosen.
+You do NOT need to convert every retrieved element into an ambiguity — only the ones you judge as genuinely ambiguous given the question context.
+
+Return only a JSON list in this format:
+[
+  {{
+    "ambiguity_type": "AmbiColumn or AmbiValue",
+    "ambiguity_context": "brief description of what is ambiguous",
+    "choices": [
+      {{
+        "nl_description": "human-readable description of this choice",
+        "sql_snippet": "the corresponding minimal SQL fragment"
+      }}
+    ]
+  }}
+]
+
+## User Question
+{question}
+
+## Evidence
+{evidence}
+
+## Current SQL (rejected by user)
+```sql
+{current_sql}
+```
+
+{target_focus_section}
+## {schema_section_title}
+{schema_ddl}
+
+## Retrieved DB Element List
+{relation_guidance}
+{formatted_dbelement_list}

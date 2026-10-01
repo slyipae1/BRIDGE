@@ -1,0 +1,41 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# Python and tool caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local runtime outputs and resumable request ledgers
+results/
+outputs/
+middle_results/
+archive_results/
+llm_requests/
+ledger/
+*.log
+
+# Derived retrieval stores and heavyweight generated artifacts
+*.sqlite
+*.sqlite3
+*.pkl
+*.npy
+*.npz
+*.jsonl.tmp
+*_chroma/
+chroma/
+
+# Local datasets, symlinks, and downloads
+dataset/
+data/
+dev_databases/
+downloads/
+
+# Editor and OS state
+.DS_Store
+.vscode/
+.idea/

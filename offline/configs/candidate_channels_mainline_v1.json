@@ -1,0 +1,38 @@
+{
+  "config_version": "candidate_channel_config_v1",
+  "channels": {
+    "lexical": {
+      "common_token_min_length": 3,
+      "token_overlap_threshold": 0.5,
+      "token_jaccard_threshold": 0.3,
+      "normalized_name_min_length": 5,
+      "char_ngram_dice_threshold": 0.6,
+      "edit_similarity_threshold": 0.7
+    },
+    "schema_embedding": {
+      "document_mode": "column_descriptive_name_only",
+      "selection_mode": "score_threshold",
+      "top_k": null,
+      "similarity_threshold": 0.55,
+      "minimum_similarity_threshold": null
+    },
+    "value_collision": {
+      "large_domain_breakpoint": 10000,
+      "large_domain_min_intersection": 30,
+      "medium_domain_breakpoint": 1000,
+      "medium_domain_min_intersection": 10,
+      "small_domain_min_intersection": 3,
+      "low_card_min_intersection": 2,
+      "low_card_overlap_threshold": 1.0,
+      "long_text_min_intersection": 3,
+      "long_text_overlap_threshold": 0.5,
+      "general_overlap_threshold": 0.5,
+      "general_containment_threshold": 0.8
+    },
+    "surface_name_embedding": {
+      "selection_mode": "score_threshold",
+      "similarity_threshold": 0.6,
+      "threshold_status": "frozen_mainline"
+    }
+  }
+}

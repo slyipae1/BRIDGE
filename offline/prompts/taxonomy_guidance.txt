@@ -1,0 +1,36 @@
+# Guidance For Pair Verification
+
+Use these categories as reasoning lenses for deciding whether a candidate column pair forms a reusable text-to-SQL ambiguity edge. They are **incomplete** guidance only: do not force a category when the supplied evidence does not support it, and do not invent database facts.
+
+## shared_referent
+
+Columns point to the same underlying referent: the same latent entity, identifier, attribute, value, or semantic object, even if they appear in different tables or use different names, codes, labels, languages, aliases, formats, or levels of detail.
+
+Use this type when the columns are intended to refer to the same latent thing, but their stored values do not need to be literally identical.
+
+Common situations:
+- Multiple external identifiers refer to the same real-world entity, such as `orders.product_type` and `products.type`.
+- Different representations or levels of detail describe the same concept, such as `articles.type`, `articles.type_code`, and `articles.type_abbreviation`.
+- One column stores a code, alias, label, translated form, normalized form, or display form for the same underlying object, such as `customers.customer_id` and `customers.customer_name`.
+
+## conceptual_facets
+
+Columns represent distinct facets, components, dimensions, measures, stages, slots, levels, or attributes of the same higher-level concept, object, process, event, or analytical frame.
+
+Use this type when the columns are not the same referent and are not clearly derived from one another, but they jointly characterize a larger concept or frame from different angles.
+
+Common situations:
+- Several measures describe different facets of the same analytical concept, such as `campaigns.views`, `campaigns.clicks`, and `campaigns.purchases` jointly characterizing campaign performance.
+- Multiple fields form different parts of the same structured object, such as `addresses.street`, `addresses.city`, and `addresses.postal_code` jointly describing an address.
+- Flattened lists, ordered stages, repeated slots, or coordinated levels occur within the same frame, such as `reviews.reviewer1_score`, `reviews.reviewer2_score`, and `reviews.reviewer3_score` describing repeated reviewer evaluations.
+- Columns represent paired endpoints or bounds of a range or interval, such as `events.start_time` and `events.end_time` defining a time interval.
+
+## contextual_collision
+
+Columns have the same or similar surface name, semantic role, or attribute nature, but belong to different table, entity, event, row-grain, metric, or task contexts.
+
+Use this type when columns may be easy to confuse because their names or roles look similar, but they should not be assumed to share the same referent or to jointly form one coherent higher-level concept.
+
+Common situations:
+- The same surface column name appears in different entity tables but refers to different entity contexts, such as `products.name`, `suppliers.name`, and `categories.name`.
+- Near-synonymous domain terms have distinct technical meanings, such as `products.type` and `orders.category`, where both describe categorical nature but apply to different targets.
